@@ -24,17 +24,23 @@ export default {
        data(){
         return {
             register:{
-                  name: '',
+              name: '',
               email: '',
               password: '', 
             }
         }
     },
+    mounted(){
+      //пример запрос на api
+      this.$axios.$post('/app').then(res=>{
+        console.log(res);
+      })
+    },
     methods:{
       async userRegister() {
       try {
         let data = await this.$axios.$post('/auth/register', this.register)
-          await this.$auth.setUserToken(data.access_token);
+        await this.$auth.setUserToken(data.access_token);
       } catch (err) {
         console.log(err);
       }
